@@ -6,7 +6,7 @@
 /*   By: owinckle <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/18 12:11:49 by owinckle          #+#    #+#             */
-/*   Updated: 2015/12/18 18:43:26 by owinckle         ###   ########.fr       */
+/*   Updated: 2016/01/04 18:18:40 by owinckle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 int g_len;
 
+/* ************************ */
 int		err(int i, char *tet, int col, int line)
 {
 	ft_putchar(tet[i]);
@@ -25,16 +26,10 @@ int		err(int i, char *tet, int col, int line)
 	ft_putnbr(col);
 	ft_putstr("\nline = ");
 	ft_putnbr(line);
-	i -= 2;
-	ft_putchar(tet[i]);
+	ft_putstr("@-@-@-@-@\n");
 	return (1);
 }
-
-int		ft_error(void)
-{
-	ft_putstr("error");
-	return (1);
-}
+/* ************************ */
 
 int		lastchar(char *tet)
 {
@@ -70,28 +65,45 @@ int		norme(char *tet, int i, int col, int line)
 		if ((col <= 4 && line <= 4 && tet[i] != '.') && (col <= 4 && line
 					<= 4 && tet[i] != '#'))
 			return (ft_error());
-		if (col == 5)
+		if (col == 5 || line == 5)
 		{
 			if (tet[i] != '\n')
 				return (ft_error());
+			if (col == 5)
+				line++;
+			if (line == 5)
+			{
+				line = 1;
+				i++;
+			}
 			col = 0;
-			line++;
-		}
-		if (line == 5)
-		{
-			if (tet[i] != '\n')
-				return (ft_error());
-			line = 1;
-			col = 0;
-			i++;
 		}
 		i++;
 		col++;
 	}
-	return (shapes(tet, 0, 1, 1);
+	last(col, line, tet);
+	return (0);
 }
 
-int shapes(char *tet, int i, int col, int line)
+int		shapes(char *tet, int i, int col, int line)
 {
-	while(
-
+	while (i <= g_len)
+	{
+		if (tet[i] == '#')
+			poscheck(tet, i, col, line);
+		if (col == 5 || line == 5)
+		{
+			if (col == 5)
+				line++;
+			if (line == 5)
+			{
+				line = 1;
+				i++;
+			}
+			col = 0;
+		}
+		i++;
+		col++;
+	}
+	return (0);
+}
